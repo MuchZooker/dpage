@@ -22,13 +22,15 @@ import Navigation from './components/Navigation.vue';
 
 <style scoped>
 .navigation-left-container {
-  width: 250px;
+  width: 15%;
   height: 100%;
   background-color: white;
 }
 
 .content-contaienr {
   /* 铺满剩余宽度 */
-  flex-grow: 1;
+  width: 85%;
+  height: 100%;
+  overflow-y: scroll;
 }
 </style>
