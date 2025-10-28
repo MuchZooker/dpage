@@ -102,7 +102,7 @@
         <div class="form-actions">
           <div class="total-preview">
             <span class="total-label">总价预览：</span>
-            <span class="total-value">¥{{ calculateTotal(currentTemplate) }}</span>
+            <span class="total-value">${{ calculateTotal(currentTemplate) }}</span>
           </div>
           <div class="action-buttons">
             <button class="btn btn-secondary" @click="cancelForm">取消</button>
@@ -419,7 +419,7 @@ const exportToExcel = async () => {
         row.getCell(1).value = itemIndex + 1;
         row.getCell(1).border = sty;
 
-        row.getCell(3).value = template.name || '';
+        row.getCell(3).value = item.description || '';
         row.getCell(4).value = '$' + (item.price || 0);
         row.getCell(5).value = item.quantity || 0;
         row.getCell(6).value = '$' + item.price * item.quantity;
@@ -432,10 +432,10 @@ const exportToExcel = async () => {
         row.getCell(5).border = sty;
         row.getCell(6).border = sty;
         // 设置行高以适应图片
-        row.height = 160;
 
         // 如果有图片，添加到图片列
         if (item.image) {
+          row.height = 160;
           try {
             // 将base64图片转换为Uint8Array
             const base64Data = item.image.split(',')[1];
@@ -478,9 +478,23 @@ const exportToExcel = async () => {
             row.getCell(2).value = '图片添加失败';
           }
         } else {
-          row.getCell(2).value = '无图片';
+
+          row.height = 50;
         }
       }
+
+      // 总金额
+      const row = worksheet.getRow(template.items.length + 2);
+      row.getCell(5).value = 'total';
+      row.getCell(5).border = sty;
+      row.getCell(5).font = {
+        color: { argb: 'FFFF0000' } // 设置为红色
+      };;
+      row.getCell(6).font = {
+        color: { argb: 'FFFF0000' } // 设置为红色
+      };;
+      row.getCell(6).value = calculateTotal(template);
+      row.getCell(6).border = sty;
     }
     // 设置所有行的对齐方式
     worksheet.eachRow((row, rowNumber) => {
