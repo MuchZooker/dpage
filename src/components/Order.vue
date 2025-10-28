@@ -8,9 +8,9 @@
     <h3 class="order-title">Making A New Trend In Poster</h3>
 
     <div style="margin-top: 10px;display: flex;">
-        <a class="order-date">17 Dec 2022</a>
+        <span class="order-date">17 Dec 2022</span>
 
-        <a class="order-step">9/10</a>
+        <span class="order-step">9/10</span>
         <img class="order-header" src="../assets/header.svg" />
     </div>
 
@@ -27,6 +27,7 @@
 
 .order-step {
     color: black;
+    padding-right: 10px;
 }
 
 .order-header {
