@@ -493,7 +493,7 @@ const exportToExcel = async () => {
       row.getCell(6).font = {
         color: { argb: 'FFFF0000' } // 设置为红色
       };;
-      row.getCell(6).value = calculateTotal(template);
+      row.getCell(6).value = '$' + calculateTotal(template);
       row.getCell(6).border = sty;
     }
     // 设置所有行的对齐方式
