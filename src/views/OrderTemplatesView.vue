@@ -2,7 +2,7 @@
   <div class="order-templates-view">
     <div class="page-header">
       <h1>订单模板管理</h1>
-      <p class="page-description">创建和管理订单模板，支持批量导出Excel</p>
+      <p class="page-description">创建和管理订单模板，支持导出Excel</p>
     </div>
 
     <div class="template-actions">
@@ -32,8 +32,8 @@
 
       <div class="form-content">
         <div class="form-group">
-          <label>模板名称 *</label>
-          <input v-model="currentTemplate.name" type="text" class="form-input" placeholder="请输入模板名称">
+          <label>客户名称 *</label>
+          <input v-model="currentTemplate.name" type="text" class="form-input" placeholder="请输入客户名称">
         </div>
 
         <!-- 多行数据输入区域 -->
@@ -73,7 +73,7 @@
                   <input v-model="item.description" type="text" class="form-input" placeholder="请输入产品描述">
                 </div>
                 <div class="form-group">
-                  <label>单价 (¥) *</label>
+                  <label>单价 ($) *</label>
                   <input v-model.number="item.price" type="number" step="0.01" class="form-input" placeholder="0.00">
                 </div>
 
@@ -83,8 +83,8 @@
                 </div>
 
                 <div class="form-group">
-                  <label>小计</label>
-                  <div class="item-total">¥{{ calculateItemTotal(item) }}</div>
+                  <label>小计 ($)</label>
+                  <div class="item-total">${{ calculateItemTotal(item) }}</div>
                 </div>
               </div>
 
@@ -383,7 +383,7 @@ const exportToExcel = async () => {
     // 设置列标题
     worksheet.columns = [
       { header: '序号', key: 'templateIndex', width: 10 },
-      { header: '图片', key: 'templateName', width: 20 },
+      { header: '图片', key: 'templateName', width: 40 },
       { header: '详情', key: 'itemName', width: 25 },
       { header: '单价', key: 'price', width: 12 },
       { header: '数量', key: 'quantity', width: 10 },
@@ -398,6 +398,12 @@ const exportToExcel = async () => {
       fgColor: { argb: 'FFE0E0E0' }
     };
 
+    let sty = {
+      top: { style: 'thin' },
+      left: { style: 'thin' },
+      bottom: { style: 'thin' },
+      right: { style: 'thin' }
+    };
 
     if (template.items && template.items.length > 0) {
       for (let itemIndex = 0; itemIndex < template.items.length; itemIndex++) {
@@ -407,14 +413,26 @@ const exportToExcel = async () => {
 
         // 添加基本数据
         const row = worksheet.getRow(rowNumber);
+
+
         // 设置基本数据
         row.getCell(1).value = itemIndex + 1;
+        row.getCell(1).border = sty;
+
         row.getCell(3).value = template.name || '';
-        row.getCell(4).value = item.price || 0;
+        row.getCell(4).value = '$' + (item.price || 0);
         row.getCell(5).value = item.quantity || 0;
-        row.getCell(6).value = item.price * item.quantity;
+        row.getCell(6).value = '$' + item.price * item.quantity;
+
+
+
+        row.getCell(2).border = sty;
+        row.getCell(3).border = sty;
+        row.getCell(4).border = sty;
+        row.getCell(5).border = sty;
+        row.getCell(6).border = sty;
         // 设置行高以适应图片
-        row.height = 80;
+        row.height = 160;
 
         // 如果有图片，添加到图片列
         if (item.image) {
@@ -472,7 +490,7 @@ const exportToExcel = async () => {
     });
 
     // 导出文件
-    const fileName = `${currentTemplate.name}_${new Date().toISOString().split('T')[0]}.xlsx`;
+    const fileName = `${template.name}_${new Date().toISOString().split('T')[0]}.xlsx`;
     const buffer = await workbook.xlsx.writeBuffer();
 
     // 创建下载链接
@@ -531,7 +549,7 @@ const exportToExcel = async () => {
   padding: 20px;
   margin-bottom: 30px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  max-width: 1000px;
+  /* max-width: 1000px; */
   margin-left: auto;
   margin-right: auto;
 }
@@ -851,7 +869,7 @@ const exportToExcel = async () => {
 }
 
 .templates-content {
-  max-width: 1200px;
+  /* max-width: 1200px; */
   margin: 0 auto;
 }
 

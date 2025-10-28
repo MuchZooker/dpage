@@ -8,7 +8,8 @@ const router = createRouter({
     {
       path: '/',
       name: 'home',
-      component: DashBoard,
+      // component: DashBoard,
+      component: () => import('../views/OrderTemplatesView.vue'),
     },
     {
       path: '/about',

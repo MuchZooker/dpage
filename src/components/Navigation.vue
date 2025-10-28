@@ -6,15 +6,15 @@ const route = useRoute();
 
 // 导航菜单配置
 const navis = ref([
-  { 
-    title: "首页", 
-    id: "1-0", 
-    path: "/",
+  {
+    title: "首页",
+    id: "1-0",
+    path: "/order-templates",
     icon: "🏠"
   },
-  { 
-    title: "订单", 
-    id: "2-0", 
+  {
+    title: "订单",
+    id: "2-0",
     children: [
       { title: "所有订单", id: "2-1", path: "/orders" },
       { title: "我的订单", id: "2-2", path: "/my-orders" },
@@ -22,15 +22,15 @@ const navis = ref([
     ],
     icon: "📋"
   },
-  { 
-    title: "库存", 
-    id: "3-0", 
-    children: [
-      { title: "所有库存", id: "3-1", path: "/inventory" },
-      { title: "我的库存", id: "3-2", path: "/my-inventory" }
-    ],
-    icon: "📦"
-  }
+  // {
+  //   title: "库存",
+  //   id: "3-0",
+  //   children: [
+  //     { title: "所有库存", id: "3-1", path: "/inventory" },
+  //     { title: "我的库存", id: "3-2", path: "/my-inventory" }
+  //   ],
+  //   icon: "📦"
+  // }
 ]);
 
 // 控制子菜单展开/收起
@@ -54,51 +54,33 @@ const isActive = (path) => {
 <template>
   <aside class="navigation-sidebar">
     <div class="navigation-header">
-      <h2>镜像俱乐部</h2>
+      <h2>XX</h2>
     </div>
-    
+
     <nav class="navigation-menu">
       <ul class="menu-list">
         <template v-for="item in navis" :key="item.id">
           <!-- 有子菜单的项目 -->
           <li v-if="item.children" class="menu-item has-children">
-            <div 
-              class="menu-item-header" 
-              @click="toggleExpanded(item.id)"
-              :class="{ active: expandedItems.has(item.id) }"
-            >
+            <div class="menu-item-header" @click="toggleExpanded(item.id)"
+              :class="{ active: expandedItems.has(item.id) }">
               <span class="menu-icon">{{ item.icon }}</span>
               <span class="menu-title">{{ item.title }}</span>
               <span class="menu-arrow" :class="{ expanded: expandedItems.has(item.id) }">▼</span>
             </div>
-            
-            <ul 
-              v-show="expandedItems.has(item.id)" 
-              class="submenu"
-            >
-              <li 
-                v-for="child in item.children" 
-                :key="child.id"
-                class="submenu-item"
-              >
-                <RouterLink 
-                  :to="child.path" 
-                  class="submenu-link"
-                  :class="{ active: isActive(child.path) }"
-                >
+
+            <ul v-show="expandedItems.has(item.id)" class="submenu">
+              <li v-for="child in item.children" :key="child.id" class="submenu-item">
+                <RouterLink :to="child.path" class="submenu-link" :class="{ active: isActive(child.path) }">
                   {{ child.title }}
                 </RouterLink>
               </li>
             </ul>
           </li>
-          
+
           <!-- 没有子菜单的项目 -->
           <li v-else class="menu-item">
-            <RouterLink 
-              :to="item.path" 
-              class="menu-link"
-              :class="{ active: isActive(item.path) }"
-            >
+            <RouterLink :to="item.path" class="menu-link" :class="{ active: isActive(item.path) }">
               <span class="menu-icon">{{ item.icon }}</span>
               <span class="menu-title">{{ item.title }}</span>
             </RouterLink>
@@ -147,7 +129,8 @@ const isActive = (path) => {
   margin-bottom: 5px;
 }
 
-.menu-link, .menu-item-header {
+.menu-link,
+.menu-item-header {
   display: flex;
   align-items: center;
   padding: 12px 20px;
@@ -158,13 +141,15 @@ const isActive = (path) => {
   border-left: 3px solid transparent;
 }
 
-.menu-link:hover, .menu-item-header:hover {
+.menu-link:hover,
+.menu-item-header:hover {
   background: rgba(255, 255, 255, 0.1);
   color: white;
   border-left-color: #ffd700;
 }
 
-.menu-link.active, .menu-item-header.active {
+.menu-link.active,
+.menu-item-header.active {
   background: rgba(255, 255, 255, 0.2);
   color: white;
   border-left-color: #ffd700;
@@ -204,6 +189,7 @@ const isActive = (path) => {
     opacity: 0;
     transform: translateY(-10px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -243,11 +229,12 @@ const isActive = (path) => {
     width: 100%;
     height: auto;
   }
-  
-  .menu-link, .menu-item-header {
+
+  .menu-link,
+  .menu-item-header {
     padding: 15px 20px;
   }
-  
+
   .submenu-link {
     padding: 12px 20px 12px 50px;
   }
