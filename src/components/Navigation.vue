@@ -94,11 +94,15 @@ const isActive = (path) => {
 <style scoped>
 .navigation-sidebar {
   height: 100vh;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  /* background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); */
   color: white;
   display: flex;
   flex-direction: column;
   box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+  background: white;
+  border-right: 1px solid var(--color-border-2);
+  box-shadow: none;
+  box-shadow: initial;
 }
 
 .navigation-header {
@@ -111,7 +115,7 @@ const isActive = (path) => {
   margin: 0;
   font-size: 1.5rem;
   font-weight: 600;
-  color: white;
+  color: black;
 }
 
 .navigation-menu {
@@ -134,7 +138,7 @@ const isActive = (path) => {
   display: flex;
   align-items: center;
   padding: 12px 20px;
-  color: rgba(255, 255, 255, 0.8);
+  color: black;
   text-decoration: none;
   transition: all 0.3s ease;
   cursor: pointer;
@@ -144,14 +148,14 @@ const isActive = (path) => {
 .menu-link:hover,
 .menu-item-header:hover {
   background: rgba(255, 255, 255, 0.1);
-  color: white;
+  /* color: white; */
   border-left-color: #ffd700;
 }
 
 .menu-link.active,
 .menu-item-header.active {
   background: rgba(255, 255, 255, 0.2);
-  color: white;
+  /* color: white; */
   border-left-color: #ffd700;
 }
 
@@ -177,10 +181,10 @@ const isActive = (path) => {
 }
 
 .submenu {
-  list-style: none;
   margin: 0;
   padding: 0;
   background: rgba(0, 0, 0, 0.1);
+  color: black;
   animation: slideDown 0.3s ease;
 }
 
@@ -203,7 +207,7 @@ const isActive = (path) => {
 .submenu-link {
   display: block;
   padding: 10px 20px 10px 50px;
-  color: rgba(255, 255, 255, 0.7);
+  color: black;
   text-decoration: none;
   transition: all 0.3s ease;
   font-size: 0.9rem;
@@ -212,13 +216,13 @@ const isActive = (path) => {
 
 .submenu-link:hover {
   background: rgba(255, 255, 255, 0.1);
-  color: white;
+  color: rgb(21, 122, 236);
   border-left-color: #ffd700;
 }
 
 .submenu-link.active {
   background: rgba(255, 255, 255, 0.15);
-  color: white;
+  color: rgb(21, 122, 236);
   border-left-color: #ffd700;
   font-weight: 600;
 }
