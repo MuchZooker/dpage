@@ -9,16 +9,16 @@ const navis = ref([
   {
     title: "首页",
     id: "1-0",
-    path: "/order-templates",
+    path: "/home/order-template",
     icon: "🏠"
   },
   {
     title: "订单",
     id: "2-0",
     children: [
-      { title: "所有订单", id: "2-1", path: "/orders" },
-      { title: "我的订单", id: "2-2", path: "/my-orders" },
-      { title: "订单模板", id: "2-3", path: "/order-templates" }
+      { title: "所有订单", id: "2-1", path: "/home/orders" },
+      { title: "我的订单", id: "2-2", path: "/home/my-orders" },
+      { title: "订单模板", id: "2-3", path: "/home/order-template" }
     ],
     icon: "📋"
   },
